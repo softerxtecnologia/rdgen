@@ -225,10 +225,10 @@ jobs:
         run: |
           # troca a frase "Feito de coração neste mundo caótico!" pelo slogan da SofterX
           find ./src/lang -name "*.rs" -exec sed -i -E 's|\("Slogan_tip", "[^"]*"\)|("Slogan_tip", "Transformando tecnologia em resultados")|' {} \;
-          # aponta "Declaração de Privacidade" para o termo do Quick Suporte
+          # aponta "Declaração de Privacidade" para o termo de acesso remoto do site
           if [[ "${{ env.urlLink }}" == *softerx* ]]; then
             for f in ./flutter/lib/desktop/pages/desktop_setting_page.dart ./flutter/lib/mobile/pages/settings_page.dart ./flutter/lib/desktop/pages/install_page.dart; do
-              [ -f "$f" ] && sed -i -e 's|/privacy.html|/acesso-remoto/termo|g' "$f"
+              [ -f "$f" ] && sed -i -e 's|/privacy.html|/legal/termo-de-acesso-remoto|g' "$f"
             done
           fi
 
