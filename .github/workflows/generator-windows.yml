@@ -257,7 +257,7 @@ jobs:
           # aponta "Declaração de Privacidade" para o termo de acesso remoto do site
           if [[ "${{ env.urlLink }}" == *softerx* ]]; then
             for f in ./flutter/lib/desktop/pages/desktop_setting_page.dart ./flutter/lib/mobile/pages/settings_page.dart ./flutter/lib/desktop/pages/install_page.dart; do
-              [ -f "$f" ] && sed -i -e 's|/privacy.html|/legal/termo-de-acesso-remoto|g' "$f"
+              [ -f "$f" ] && sed -i -e 's|/privacy.html|/termo-de-acesso-remoto|g' "$f"
             done
           fi
 
