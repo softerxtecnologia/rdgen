@@ -248,6 +248,19 @@ jobs:
           sed -i -e "s|https://rustdesk.com/privacy.html|${{ env.urlLink }}/privacy.html|" ./flutter/lib/desktop/pages/install_page.dart
           sed -i -e "s|rustdesk.com|${{ env.urlLink }}|" ./res/msi/Package/License.rtf
 
+      - name: SofterX - textos personalizados
+        continue-on-error: true
+        shell: bash
+        run: |
+          # troca a frase "Feito de coração neste mundo caótico!" pelo slogan da SofterX
+          find ./src/lang -name "*.rs" -exec sed -i -E 's|\("Slogan_tip", "[^"]*"\)|("Slogan_tip", "Transformando tecnologia em resultados")|' {} \;
+          # aponta "Declaração de Privacidade" para o termo do Quick Suporte
+          if [[ "${{ env.urlLink }}" == *softerx* ]]; then
+            for f in ./flutter/lib/desktop/pages/desktop_setting_page.dart ./flutter/lib/mobile/pages/settings_page.dart ./flutter/lib/desktop/pages/install_page.dart; do
+              [ -f "$f" ] && sed -i -e 's|/privacy.html|/acesso-remoto/termo|g' "$f"
+            done
+          fi
+
       - name: change download link to custom
         if: env.downloadLink != 'https://rustdesk.com/download'
         continue-on-error: true
